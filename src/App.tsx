@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Exchanges from "./Exchanges";
+import Exchanges from "./Exchanges/Exchanges";
 import { Routes, Route, Link } from "react-router-dom";
-import SingleExchange from "./SingleExchange";
+import SingleExchange from "./SingleExchange/SingleExchange";
 import { ExchangesContextType } from "./models";
 
 export const ExchangeContext = React.createContext<ExchangesContextType>({

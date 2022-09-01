@@ -12,3 +12,11 @@ export interface ExchangesType {
 export interface ExchangesContextType {
   exchanges: ExchangesType[];
 }
+
+export interface SocialUrls {
+  facebook_url: string;
+  reddit_url: string;
+  slack_url: string;
+  telegram_url: string;
+  twitter_handle: string;
+}

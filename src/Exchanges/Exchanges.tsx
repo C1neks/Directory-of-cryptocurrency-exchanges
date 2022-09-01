@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ExchangesType } from "./models";
+import React, { useContext } from "react";
+import { ExchangesType } from "../models";
 import {
   Country,
   CountryAndRank,
@@ -13,7 +13,7 @@ import {
   Wrapper,
 } from "./Exchanges.styles";
 
-import { ExchangeContext } from "./App";
+import { ExchangeContext } from "../App";
 
 interface Props {
   setExchangeID: React.Dispatch<React.SetStateAction<string>>;
