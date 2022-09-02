@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Exchanges from "./Exchanges";
-import { Routes, Route, Link } from "react-router-dom";
-import SingleExchange from "./SingleExchange";
+import Exchanges from "./Exchanges/Exchanges";
+import { Routes, Route } from "react-router-dom";
+import SingleExchange from "./SingleExchange/SingleExchange";
 import { ExchangesContextType } from "./models";
 
 export const ExchangeContext = React.createContext<ExchangesContextType>({
@@ -21,13 +21,13 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const a = await getExchanges();
-      console.log(a);
-      setExchanges(a);
+      const result = await getExchanges();
+
+      setExchanges(result);
     })();
   }, []);
 
-  const [exchangeID, setExchangeID] = useState("");
+  const [exchangeID, setExchangeID] = useState<string>("");
   return (
     <div>
       <ExchangeContext.Provider value={{ exchanges }}>
