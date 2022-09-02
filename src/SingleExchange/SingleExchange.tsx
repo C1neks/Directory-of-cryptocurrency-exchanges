@@ -10,6 +10,8 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import {
+  BackButton,
+  ButtonWrapper,
   Container,
   Description,
   DetailsText,
@@ -136,6 +138,10 @@ const SingleExchange: React.FC<Props> = ({ exchangeID }) => {
           </IconContext.Provider>
         </ExchangeInfo>
       </Wrapper>
+      <ButtonWrapper>
+        <BackButton onClick={() => window.history.back()}>Go Back</BackButton>
+      </ButtonWrapper>
+
       <Square></Square>
     </>
   );

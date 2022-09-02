@@ -116,3 +116,24 @@ export const Description = styled.div`
 export const DetailsText = styled.span`
   text-align: ${({ year }) => (year ? "right" : "left")};
 `;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+export const BackButton = styled.button`
+  border-radius: 10px;
+  color: white;
+  background: #191b1f;
+  border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  :hover {
+    background: rgb(8 129 240);
+    transition: 0.5s;
+  }
+`;
