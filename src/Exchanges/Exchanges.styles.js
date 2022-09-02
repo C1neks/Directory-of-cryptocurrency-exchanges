@@ -63,6 +63,8 @@ export const Exchange = styled.div`
 
   :hover {
     background: #003fc2;
+    font-size: 1.3rem;
+    transition: 1s;
   }
 `;
 

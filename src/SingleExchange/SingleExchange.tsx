@@ -48,9 +48,9 @@ const SingleExchange: React.FC<Props> = ({ exchangeID }) => {
 
   useEffect(() => {
     (async () => {
-      const a = await getSocialMediaLinks();
-      console.log(a);
-      setSocialLinks(a);
+      const result = await getSocialMediaLinks();
+
+      setSocialLinks(result);
     })();
   }, []);
 
