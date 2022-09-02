@@ -10,15 +10,23 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import {
+  Container,
+  Description,
+  DetailsText,
   ExchangeInfo,
   Icons,
   IconsWrapper,
+  LogoImage,
   LogoName,
+  MoreDetailsAboutCurrency,
+  Name,
   RankCountry,
+  Score,
   SocialIconLink,
+  Square,
   Wrapper,
 } from "./SingleExchange.styles";
-
+import { IconContext } from "react-icons";
 interface Props {
   exchangeID: string;
 }
@@ -82,36 +90,54 @@ const SingleExchange: React.FC<Props> = ({ exchangeID }) => {
   ) : null;
 
   return (
-    <Wrapper>
-      <ExchangeInfo>
-        <LogoName>
-          <img src={exchangeDetails?.image} alt="" />
-          <div>{exchangeDetails?.name}</div>
-        </LogoName>
-        <RankCountry>
-          <div>{exchangeDetails?.country}</div>
-          <div>{exchangeDetails?.trust_score_rank}</div>
+    <>
+      <MoreDetailsAboutCurrency>
+        <h4>Directory of Cryptocurrency</h4>
+      </MoreDetailsAboutCurrency>
+      <Wrapper>
+        <ExchangeInfo>
+          <LogoName>
+            <LogoImage src={exchangeDetails?.image} alt="" />
+            <Name>{exchangeDetails?.name}</Name>
+            <Container>
+              <Score>{exchangeDetails?.trust_score_rank}</Score>
+            </Container>
+          </LogoName>
+          <RankCountry>
+            <DetailsText>
+              <p>Country</p>
+              <p>{exchangeDetails?.country}</p>
+            </DetailsText>
 
-          <div>{exchangeDetails?.year_established}</div>
-        </RankCountry>
+            <DetailsText year>
+              <p>Year of Establishment</p>
+              <p>{exchangeDetails?.year_established}</p>
+            </DetailsText>
+          </RankCountry>
 
-        <div>
-          Description:
-          {exchangeDetails?.description === ""
-            ? "No description"
-            : exchangeDetails?.description}
-        </div>
-        <IconsWrapper>
-          <Icons>
-            {facebookIcon}
-            {redditIcon}
-            {slackIcon}
-            {telegramIcon}
-            {twitterIcon}
-          </Icons>
-        </IconsWrapper>
-      </ExchangeInfo>
-    </Wrapper>
+          <Description>
+            <p>Description</p>
+            <p>
+              {exchangeDetails?.description === ""
+                ? "No description"
+                : exchangeDetails?.description}
+            </p>
+          </Description>
+          <IconContext.Provider value={{ color: "#003fc2", size: "20" }}>
+            <IconsWrapper>
+              <Icons>
+                {facebookIcon}
+                {redditIcon}
+                {slackIcon}
+                {telegramIcon}
+                {twitterIcon}
+              </Icons>
+            </IconsWrapper>
+          </IconContext.Provider>
+        </ExchangeInfo>
+      </Wrapper>
+      <Square></Square>
+    </>
   );
 };
 
