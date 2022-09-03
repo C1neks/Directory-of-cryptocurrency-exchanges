@@ -16,11 +16,7 @@ import {
 import { ExchangeContext } from "../App";
 import { MoreDetailsAboutCurrency } from "../SingleExchange/SingleExchange.styles";
 
-interface Props {
-  setExchangeID: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const Exchanges: React.FC<Props> = ({ setExchangeID }) => {
+const Exchanges: React.FC = () => {
   const context = useContext(ExchangeContext);
 
   const stopEvent = (event: { stopPropagation: () => any }) =>
@@ -34,11 +30,7 @@ const Exchanges: React.FC<Props> = ({ setExchangeID }) => {
       <Wrapper>
         {" "}
         {context.exchanges.map((exchange: ExchangesType) => (
-          <LinkToDetails
-            to="/exchange"
-            onClick={() => setExchangeID(exchange.id)}
-            key={exchange.id}
-          >
+          <LinkToDetails to={"exchange/" + exchange.id} key={exchange.id}>
             <Exchange>
               <ExchangeDetails>
                 <Image src={exchange.image} />

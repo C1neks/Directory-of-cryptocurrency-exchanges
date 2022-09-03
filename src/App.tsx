@@ -27,19 +27,12 @@ function App() {
     })();
   }, []);
 
-  const [exchangeID, setExchangeID] = useState<string>("");
   return (
     <div>
       <ExchangeContext.Provider value={{ exchanges }}>
         <Routes>
-          <Route
-            path="/"
-            element={<Exchanges setExchangeID={setExchangeID} />}
-          />
-          <Route
-            path="/exchange"
-            element={<SingleExchange exchangeID={exchangeID} />}
-          />
+          <Route path="/" element={<Exchanges />} />
+          <Route path="/exchange/:exchangeID" element={<SingleExchange />} />
         </Routes>
       </ExchangeContext.Provider>
     </div>

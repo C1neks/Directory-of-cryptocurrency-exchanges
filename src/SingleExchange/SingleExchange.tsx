@@ -29,11 +29,11 @@ import {
   Wrapper,
 } from "./SingleExchange.styles";
 import { IconContext } from "react-icons";
-interface Props {
-  exchangeID: string;
-}
+import { useParams } from "react-router-dom";
 
-const SingleExchange: React.FC<Props> = ({ exchangeID }) => {
+const SingleExchange: React.FC = ({}) => {
+  let { exchangeID } = useParams();
+
   const context = useContext(ExchangeContext);
   const [socialLink, setSocialLinks] = useState<SocialUrls>();
   const exchangeDetails = context.exchanges.find(
