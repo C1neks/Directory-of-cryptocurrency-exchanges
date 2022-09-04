@@ -10,6 +10,8 @@ import {
   LinkToDetails,
   NameAndUrl,
   Score,
+  SquareMain,
+  SquareWrapper,
   Wrapper,
 } from "./Exchanges.styles";
 
@@ -24,9 +26,13 @@ const Exchanges: React.FC = () => {
 
   return (
     <>
-      <MoreDetailsAboutCurrency>
+      <MoreDetailsAboutCurrency main>
         <h1>Directory of Cryptocurrency Exchanges</h1>
       </MoreDetailsAboutCurrency>
+      <SquareWrapper>
+        <SquareMain />
+      </SquareWrapper>
+
       <Wrapper>
         {" "}
         {context.exchanges.map((exchange: ExchangesType) => (

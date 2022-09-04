@@ -11,6 +11,12 @@ export const ExchangeInfo = styled.div`
   width: 90%;
   border-radius: 0.3rem;
   color: white;
+  @media screen and (min-width: 1024px) {
+    width: 70%;
+  }
+  @media screen and (min-width: 1300px) {
+    width: 40%;
+  }
 `;
 
 export const SocialIconLink = styled.a`
@@ -49,17 +55,23 @@ export const Square = styled.div`
     rgba(8, 129, 240, 1) 67%,
     rgba(0, 212, 255, 1) 100%
   );
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 10px;
   transform: rotate(60deg);
-  margin: 4rem 2rem 2rem 18rem;
+
+  @media screen and (min-width: 1024px) {
+    width: 10rem;
+    height: 10rem;
+  }
 `;
 
 export const MoreDetailsAboutCurrency = styled.div`
   color: white;
   text-align: center;
-  margin: 3rem 0rem 5rem 0rem;
+
+  margin: ${({ main }) =>
+    main ? "3rem 0rem 3rem 0rem" : "3rem 0rem 5rem 0rem"};
 `;
 
 export const Icons = styled.div`
@@ -123,6 +135,7 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const BackButton = styled.button`
@@ -132,8 +145,17 @@ export const BackButton = styled.button`
   border: none;
   padding: 0.5rem 2rem;
   font-size: 1rem;
+  cursor: pointer;
+
   :hover {
     background: rgb(8 129 240);
     transition: 0.5s;
+  }
+`;
+
+export const DescriptionTitle = styled.p`
+  text-align: left;
+  @media screen and (min-width: 1024px) {
+    text-align: center;
   }
 `;
