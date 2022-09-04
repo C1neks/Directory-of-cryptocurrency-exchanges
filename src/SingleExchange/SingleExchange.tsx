@@ -14,6 +14,7 @@ import {
   ButtonWrapper,
   Container,
   Description,
+  DescriptionTitle,
   DetailsText,
   ExchangeInfo,
   Icons,
@@ -30,6 +31,7 @@ import {
 } from "./SingleExchange.styles";
 import { IconContext } from "react-icons";
 import { useParams } from "react-router-dom";
+import { SquareWrapper } from "../Exchanges/Exchanges.styles";
 
 const SingleExchange: React.FC = ({}) => {
   let { exchangeID } = useParams();
@@ -118,7 +120,7 @@ const SingleExchange: React.FC = ({}) => {
           </RankCountry>
 
           <Description>
-            <p>Description</p>
+            <DescriptionTitle>Description</DescriptionTitle>
             <p>
               {exchangeDetails?.description === ""
                 ? "No description"
@@ -141,8 +143,9 @@ const SingleExchange: React.FC = ({}) => {
       <ButtonWrapper>
         <BackButton onClick={() => window.history.back()}>Go Back</BackButton>
       </ButtonWrapper>
-
-      <Square></Square>
+      <SquareWrapper single>
+        <Square />
+      </SquareWrapper>
     </>
   );
 };
