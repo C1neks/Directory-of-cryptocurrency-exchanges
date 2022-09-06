@@ -39,7 +39,7 @@ const Exchanges: React.FC = () => {
           <LinkToDetails to={"exchange/" + exchange.id} key={exchange.id}>
             <Exchange>
               <ExchangeDetails>
-                <Image src={exchange.image} />
+                <Image src={exchange.image} alt={exchange.name} />
                 <NameAndUrl>
                   <h4>{exchange.name}</h4>
                   <ExchangeLink href={exchange.url} onClick={stopEvent}>

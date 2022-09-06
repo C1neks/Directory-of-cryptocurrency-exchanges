@@ -59,35 +59,38 @@ const SingleExchange: React.FC = ({}) => {
   }, []);
 
   const facebookIcon = socialLink?.facebook_url ? (
-    <SocialIconLink href={socialLink.facebook_url}>
+    <SocialIconLink href={socialLink.facebook_url} data-testid="social-icon">
       {" "}
       <BsFacebook />
     </SocialIconLink>
   ) : null;
 
   const redditIcon = socialLink?.reddit_url ? (
-    <SocialIconLink href={socialLink.reddit_url}>
+    <SocialIconLink href={socialLink.reddit_url} data-testid="social-icon">
       {" "}
       <BsReddit />
     </SocialIconLink>
   ) : null;
 
   const slackIcon = socialLink?.slack_url ? (
-    <SocialIconLink href={socialLink.slack_url}>
+    <SocialIconLink href={socialLink.slack_url} data-testid="social-icon">
       {" "}
       <BsSlack />
     </SocialIconLink>
   ) : null;
 
   const telegramIcon = socialLink?.telegram_url ? (
-    <SocialIconLink href={socialLink.telegram_url}>
+    <SocialIconLink href={socialLink.telegram_url} data-testid="social-icon">
       {" "}
       <BsTelegram />
     </SocialIconLink>
   ) : null;
 
   const twitterIcon = socialLink?.twitter_handle ? (
-    <SocialIconLink href={"https://twitter.com/" + socialLink.twitter_handle}>
+    <SocialIconLink
+      href={"https://twitter.com/" + socialLink.twitter_handle}
+      data-testid="social-icon"
+    >
       {" "}
       <BsTwitter />
     </SocialIconLink>
@@ -104,7 +107,9 @@ const SingleExchange: React.FC = ({}) => {
             <LogoImage src={exchangeDetails?.image} alt="" />
             <Name>{exchangeDetails?.name}</Name>
             <Container>
-              <Score>{exchangeDetails?.trust_score_rank}</Score>
+              <Score data-testid="score_rank">
+                {exchangeDetails?.trust_score_rank}
+              </Score>
             </Container>
           </LogoName>
           <RankCountry>
@@ -141,7 +146,12 @@ const SingleExchange: React.FC = ({}) => {
         </ExchangeInfo>
       </Wrapper>
       <ButtonWrapper>
-        <BackButton onClick={() => window.history.back()}>Go Back</BackButton>
+        <BackButton
+          data-testid="back-button"
+          onClick={() => window.history.back()}
+        >
+          Go Back
+        </BackButton>
       </ButtonWrapper>
       <SquareWrapper single>
         <Square />
