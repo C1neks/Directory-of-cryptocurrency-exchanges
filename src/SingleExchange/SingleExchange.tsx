@@ -1,14 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { ExchangeContext } from "../App";
-import { SocialUrls } from "../models";
-import {
-  BsFacebook,
-  BsReddit,
-  BsSlack,
-  BsTelegram,
-  BsTwitter,
-} from "react-icons/bs";
 import {
   BackButton,
   ButtonWrapper,
@@ -32,15 +23,13 @@ import {
 import { IconContext } from "react-icons";
 import { useParams } from "react-router-dom";
 import { SquareWrapper } from "../Exchanges/Exchanges.styles";
+import { SocialMediaUrls } from "./socialMediaUrls";
 
 const SingleExchange: React.FC = ({}) => {
   let { exchangeID } = useParams();
 
-  const context = useContext(ExchangeContext);
-  const [socialLink, setSocialLinks] = useState<SocialUrls>();
-  const exchangeDetails = context.exchanges.find(
-    (exchange) => exchange.id === exchangeID
-  );
+  const [socialLink, setSocialLinks] = useState<any>();
+  const [socialIcons, setSocialIcons] = useState<any>([]);
 
   const getSocialMediaLinks = async () => {
     const response = await fetch(
@@ -53,48 +42,11 @@ const SingleExchange: React.FC = ({}) => {
   useEffect(() => {
     (async () => {
       const result = await getSocialMediaLinks();
-
       setSocialLinks(result);
+      const mediaUrls = await SocialMediaUrls(result);
+      setSocialIcons(mediaUrls);
     })();
   }, []);
-
-  const facebookIcon = socialLink?.facebook_url ? (
-    <SocialIconLink href={socialLink.facebook_url} data-testid="social-icon">
-      {" "}
-      <BsFacebook />
-    </SocialIconLink>
-  ) : null;
-
-  const redditIcon = socialLink?.reddit_url ? (
-    <SocialIconLink href={socialLink.reddit_url} data-testid="social-icon">
-      {" "}
-      <BsReddit />
-    </SocialIconLink>
-  ) : null;
-
-  const slackIcon = socialLink?.slack_url ? (
-    <SocialIconLink href={socialLink.slack_url} data-testid="social-icon">
-      {" "}
-      <BsSlack />
-    </SocialIconLink>
-  ) : null;
-
-  const telegramIcon = socialLink?.telegram_url ? (
-    <SocialIconLink href={socialLink.telegram_url} data-testid="social-icon">
-      {" "}
-      <BsTelegram />
-    </SocialIconLink>
-  ) : null;
-
-  const twitterIcon = socialLink?.twitter_handle ? (
-    <SocialIconLink
-      href={"https://twitter.com/" + socialLink.twitter_handle}
-      data-testid="social-icon"
-    >
-      {" "}
-      <BsTwitter />
-    </SocialIconLink>
-  ) : null;
 
   return (
     <>
@@ -104,42 +56,42 @@ const SingleExchange: React.FC = ({}) => {
       <Wrapper>
         <ExchangeInfo>
           <LogoName>
-            <LogoImage src={exchangeDetails?.image} alt="" />
-            <Name>{exchangeDetails?.name}</Name>
+            <LogoImage src={socialLink?.image} alt="" />
+            <Name>{socialLink?.name}</Name>
             <Container>
               <Score data-testid="score_rank">
-                {exchangeDetails?.trust_score_rank}
+                {socialLink?.trust_score_rank}
               </Score>
             </Container>
           </LogoName>
           <RankCountry>
             <DetailsText>
               <p>Country</p>
-              <p>{exchangeDetails?.country}</p>
+              <p>{socialLink?.country}</p>
             </DetailsText>
 
             <DetailsText year>
               <p>Year of Establishment</p>
-              <p>{exchangeDetails?.year_established}</p>
+              <p>{socialLink?.year_established}</p>
             </DetailsText>
           </RankCountry>
 
           <Description>
             <DescriptionTitle>Description</DescriptionTitle>
             <p>
-              {exchangeDetails?.description === ""
+              {socialLink?.description === ""
                 ? "No description"
-                : exchangeDetails?.description}
+                : socialLink?.description}
             </p>
           </Description>
           <IconContext.Provider value={{ color: "#003fc2", size: "20" }}>
             <IconsWrapper>
               <Icons>
-                {facebookIcon}
-                {redditIcon}
-                {slackIcon}
-                {telegramIcon}
-                {twitterIcon}
+                {socialIcons.map((social: any) => (
+                  <SocialIconLink href={social.link} data-testid="social-icon">
+                    {social.icon}
+                  </SocialIconLink>
+                ))}
               </Icons>
             </IconsWrapper>
           </IconContext.Provider>

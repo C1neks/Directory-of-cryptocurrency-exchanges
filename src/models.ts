@@ -14,9 +14,14 @@ export interface ExchangesContextType {
 }
 
 export interface SocialUrls {
-  facebook_url: string;
+  facebook_url: number;
   reddit_url: string;
   slack_url: string;
   telegram_url: string;
   twitter_handle: string;
+}
+
+export interface socialURL {
+  link: string;
+  icon: JSX.Element;
 }
