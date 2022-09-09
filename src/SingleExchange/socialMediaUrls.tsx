@@ -5,11 +5,13 @@ import {
   BsTelegram,
   BsTwitter,
 } from "react-icons/bs";
-import { socialURL } from "../models";
+import { SocialDetails, SocialLinks } from "../models";
 
-export const SocialMediaUrls = async (exchangeDetails: any) => {
-  const socialUrls: Array<socialURL> = [];
-  console.log("DETAILS!", exchangeDetails);
+export const SocialMediaUrls = async (
+  exchangeDetails: SocialLinks
+): Promise<SocialDetails[]> => {
+  const socialUrls: Array<SocialDetails> = [];
+
   for (const [key, value] of Object.entries(exchangeDetails)) {
     if (key === "facebook_url" && value !== "") {
       socialUrls.push({ link: `${value}`, icon: <BsFacebook /> });

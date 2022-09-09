@@ -8,6 +8,7 @@ import {
   ExchangeLink,
   Image,
   LinkToDetails,
+  MoreDetailsAboutCurrencyMain,
   NameAndUrl,
   Score,
   SquareMain,
@@ -16,7 +17,6 @@ import {
 } from "./Exchanges.styles";
 
 import { ExchangeContext } from "../App";
-import { MoreDetailsAboutCurrency } from "../SingleExchange/SingleExchange.styles";
 
 const Exchanges: React.FC = () => {
   const context = useContext(ExchangeContext);
@@ -26,9 +26,9 @@ const Exchanges: React.FC = () => {
 
   return (
     <>
-      <MoreDetailsAboutCurrency main>
+      <MoreDetailsAboutCurrencyMain>
         <h1>Directory of Cryptocurrency Exchanges</h1>
-      </MoreDetailsAboutCurrency>
+      </MoreDetailsAboutCurrencyMain>
       <SquareWrapper>
         <SquareMain />
       </SquareWrapper>

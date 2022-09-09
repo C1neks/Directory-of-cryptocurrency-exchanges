@@ -7,6 +7,7 @@ import {
   Description,
   DescriptionTitle,
   DetailsText,
+  DetailsTextYear,
   ExchangeInfo,
   Icons,
   IconsWrapper,
@@ -18,20 +19,22 @@ import {
   Score,
   SocialIconLink,
   Square,
+  SquareWrapperSingle,
   Wrapper,
 } from "./SingleExchange.styles";
 import { IconContext } from "react-icons";
 import { useParams } from "react-router-dom";
-import { SquareWrapper } from "../Exchanges/Exchanges.styles";
-import { SocialMediaUrls } from "./socialMediaUrls";
 
-const SingleExchange: React.FC = ({}) => {
+import { SocialMediaUrls } from "./socialMediaUrls";
+import { SocialDetails, SocialLinks } from "../models";
+
+const SingleExchange: React.FC = () => {
   let { exchangeID } = useParams();
 
-  const [socialLink, setSocialLinks] = useState<any>();
-  const [socialIcons, setSocialIcons] = useState<any>([]);
+  const [exchangeDetails, setExchangeDetails] = useState<SocialLinks>();
+  const [socialIcons, setSocialIcons] = useState<Array<SocialDetails>>([]);
 
-  const getSocialMediaLinks = async () => {
+  const getExchangeDetails = async () => {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/exchanges/${exchangeID}`
     );
@@ -41,9 +44,9 @@ const SingleExchange: React.FC = ({}) => {
 
   useEffect(() => {
     (async () => {
-      const result = await getSocialMediaLinks();
-      setSocialLinks(result);
-      const mediaUrls = await SocialMediaUrls(result);
+      const details = await getExchangeDetails();
+      setExchangeDetails(details);
+      const mediaUrls = await SocialMediaUrls(details);
       setSocialIcons(mediaUrls);
     })();
   }, []);
@@ -56,38 +59,38 @@ const SingleExchange: React.FC = ({}) => {
       <Wrapper>
         <ExchangeInfo>
           <LogoName>
-            <LogoImage src={socialLink?.image} alt="" />
-            <Name>{socialLink?.name}</Name>
+            <LogoImage src={exchangeDetails?.image} alt="" />
+            <Name>{exchangeDetails?.name}</Name>
             <Container>
               <Score data-testid="score_rank">
-                {socialLink?.trust_score_rank}
+                {exchangeDetails?.trust_score_rank}
               </Score>
             </Container>
           </LogoName>
           <RankCountry>
             <DetailsText>
               <p>Country</p>
-              <p>{socialLink?.country}</p>
+              <p>{exchangeDetails?.country}</p>
             </DetailsText>
 
-            <DetailsText year>
+            <DetailsTextYear>
               <p>Year of Establishment</p>
-              <p>{socialLink?.year_established}</p>
-            </DetailsText>
+              <p>{exchangeDetails?.year_established}</p>
+            </DetailsTextYear>
           </RankCountry>
 
           <Description>
             <DescriptionTitle>Description</DescriptionTitle>
             <p>
-              {socialLink?.description === ""
+              {exchangeDetails?.description === ""
                 ? "No description"
-                : socialLink?.description}
+                : exchangeDetails?.description}
             </p>
           </Description>
           <IconContext.Provider value={{ color: "#003fc2", size: "20" }}>
             <IconsWrapper>
               <Icons>
-                {socialIcons.map((social: any) => (
+                {socialIcons.map((social: SocialDetails) => (
                   <SocialIconLink href={social.link} data-testid="social-icon">
                     {social.icon}
                   </SocialIconLink>
@@ -105,9 +108,9 @@ const SingleExchange: React.FC = ({}) => {
           Go Back
         </BackButton>
       </ButtonWrapper>
-      <SquareWrapper single>
+      <SquareWrapperSingle>
         <Square />
-      </SquareWrapper>
+      </SquareWrapperSingle>
     </>
   );
 };

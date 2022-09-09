@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 export const Image = styled.img`
   width: 2.5rem;
   height: 2.5rem;
-  margin: 0px 0.5rem;
+  margin: 0 0.5rem;
   border-radius: 2rem;
 `;
 
@@ -113,10 +113,15 @@ export const SquareWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 3rem;
-
-  margin-left: ${({ single }) => (single ? "4rem" : "3rem")};
+  margin-left: 4rem;
 
   @media screen and (min-width: 768px) {
-    margin-left: ${({ single }) => (single ? "2rem" : "0rem")};
+    margin-left: 2rem;
   }
+`;
+
+export const MoreDetailsAboutCurrencyMain = styled.div`
+  color: white;
+  text-align: center;
+  margin: 3rem 0rem 3rem 0rem;
 `;
