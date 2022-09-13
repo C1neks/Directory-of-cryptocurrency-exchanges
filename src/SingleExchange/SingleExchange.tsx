@@ -27,6 +27,7 @@ import { useParams } from "react-router-dom";
 
 import { SocialMediaUrls } from "./socialMediaUrls";
 import { SocialDetails, SocialLinks } from "../models";
+import { ContainerMain } from "../Exchanges/Exchanges.styles";
 
 const SingleExchange: React.FC = () => {
   let { exchangeID } = useParams();
@@ -52,7 +53,7 @@ const SingleExchange: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <ContainerMain>
       <MoreDetailsAboutCurrency>
         <h4>Directory of Cryptocurrency</h4>
       </MoreDetailsAboutCurrency>
@@ -111,7 +112,7 @@ const SingleExchange: React.FC = () => {
       <SquareWrapperSingle>
         <Square />
       </SquareWrapperSingle>
-    </>
+    </ContainerMain>
   );
 };
 

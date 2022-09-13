@@ -21,13 +21,16 @@ export const Image = styled.img`
 `;
 
 export const Score = styled.p`
-  background: #01a0bb;
-  width: 2rem;
-  height: 2rem;
+  background: #0881f0;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  color: white;
+  margin-right: 0.5rem;
 `;
 
 export const Country = styled.p`
@@ -40,9 +43,11 @@ export const Country = styled.p`
 
 export const LinkToDetails = styled(Link)`
   text-decoration: none;
-  width: 100%;
+  width: 98%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 
   @media screen and (min-width: 1024px) {
     width: 50%;
@@ -64,7 +69,7 @@ export const ExchangeLink = styled.a`
 `;
 
 export const Exchange = styled.div`
-  margin-top: 2rem;
+  //margin-top: 2rem;
   color: white;
   background: #191b1f;
   border-radius: 1rem;
@@ -75,8 +80,8 @@ export const Exchange = styled.div`
 
   :hover {
     background: #003fc2;
-    font-size: 1.3rem;
-    transition: 1s;
+
+    transition: 0.5s;
   }
 `;
 
@@ -124,4 +129,8 @@ export const MoreDetailsAboutCurrencyMain = styled.div`
   color: white;
   text-align: center;
   margin: 3rem 0rem 3rem 0rem;
+`;
+
+export const ContainerMain = styled.div`
+  overflow: hidden;
 `;

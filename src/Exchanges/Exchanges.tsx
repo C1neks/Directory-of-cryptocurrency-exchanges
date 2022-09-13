@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ExchangesType } from "../models";
 import {
+  ContainerMain,
   Country,
   CountryAndRank,
   Exchange,
@@ -25,7 +26,7 @@ const Exchanges: React.FC = () => {
     event.stopPropagation();
 
   return (
-    <>
+    <ContainerMain>
       <MoreDetailsAboutCurrencyMain>
         <h1>Directory of Cryptocurrency Exchanges</h1>
       </MoreDetailsAboutCurrencyMain>
@@ -37,6 +38,7 @@ const Exchanges: React.FC = () => {
         {" "}
         {context.exchanges.map((exchange: ExchangesType) => (
           <LinkToDetails to={"exchange/" + exchange.id} key={exchange.id}>
+            <Score>{exchange.trust_score_rank}</Score>
             <Exchange>
               <ExchangeDetails>
                 <Image src={exchange.image} alt={exchange.name} />
@@ -49,14 +51,13 @@ const Exchanges: React.FC = () => {
               </ExchangeDetails>
 
               <CountryAndRank>
-                <Score>{exchange.trust_score_rank}</Score>
                 <Country>{exchange.country}</Country>
               </CountryAndRank>
             </Exchange>
           </LinkToDetails>
         ))}
       </Wrapper>
-    </>
+    </ContainerMain>
   );
 };
 
