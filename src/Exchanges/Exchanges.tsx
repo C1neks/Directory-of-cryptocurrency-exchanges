@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ExchangesType } from "../models";
 import {
+  ContainerMain,
   Country,
   CountryAndRank,
   Exchange,
@@ -8,6 +9,7 @@ import {
   ExchangeLink,
   Image,
   LinkToDetails,
+  MoreDetailsAboutCurrencyMain,
   NameAndUrl,
   Score,
   SquareMain,
@@ -16,7 +18,6 @@ import {
 } from "./Exchanges.styles";
 
 import { ExchangeContext } from "../App";
-import { MoreDetailsAboutCurrency } from "../SingleExchange/SingleExchange.styles";
 
 const Exchanges: React.FC = () => {
   const context = useContext(ExchangeContext);
@@ -25,10 +26,10 @@ const Exchanges: React.FC = () => {
     event.stopPropagation();
 
   return (
-    <>
-      <MoreDetailsAboutCurrency main>
+    <ContainerMain>
+      <MoreDetailsAboutCurrencyMain>
         <h1>Directory of Cryptocurrency Exchanges</h1>
-      </MoreDetailsAboutCurrency>
+      </MoreDetailsAboutCurrencyMain>
       <SquareWrapper>
         <SquareMain />
       </SquareWrapper>
@@ -37,6 +38,7 @@ const Exchanges: React.FC = () => {
         {" "}
         {context.exchanges.map((exchange: ExchangesType) => (
           <LinkToDetails to={"exchange/" + exchange.id} key={exchange.id}>
+            <Score>{exchange.trust_score_rank}</Score>
             <Exchange>
               <ExchangeDetails>
                 <Image src={exchange.image} alt={exchange.name} />
@@ -49,14 +51,13 @@ const Exchanges: React.FC = () => {
               </ExchangeDetails>
 
               <CountryAndRank>
-                <Score>{exchange.trust_score_rank}</Score>
                 <Country>{exchange.country}</Country>
               </CountryAndRank>
             </Exchange>
           </LinkToDetails>
         ))}
       </Wrapper>
-    </>
+    </ContainerMain>
   );
 };
 

@@ -13,10 +13,15 @@ export interface ExchangesContextType {
   exchanges: ExchangesType[];
 }
 
-export interface SocialUrls {
+export interface SocialLinks extends ExchangesType {
   facebook_url: string;
   reddit_url: string;
   slack_url: string;
   telegram_url: string;
   twitter_handle: string;
+}
+
+export interface SocialDetails {
+  link: string;
+  icon: JSX.Element;
 }

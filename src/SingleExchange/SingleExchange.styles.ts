@@ -69,9 +69,7 @@ export const Square = styled.div`
 export const MoreDetailsAboutCurrency = styled.div`
   color: white;
   text-align: center;
-
-  margin: ${({ main }) =>
-    main ? "3rem 0rem 3rem 0rem" : "3rem 0rem 5rem 0rem"};
+  margin: 3rem 0rem 5rem 0rem;
 `;
 
 export const Icons = styled.div`
@@ -126,7 +124,11 @@ export const Description = styled.div`
   }
 `;
 export const DetailsText = styled.span`
-  text-align: ${({ year }) => (year ? "right" : "left")};
+  text-align: left;
+`;
+
+export const DetailsTextYear = styled.span`
+  text-align: right;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -157,5 +159,18 @@ export const DescriptionTitle = styled.p`
   text-align: left;
   @media screen and (min-width: 1024px) {
     text-align: center;
+  }
+`;
+
+export const SquareWrapperSingle = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 3rem;
+  margin-left: 3rem;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 0rem;
   }
 `;

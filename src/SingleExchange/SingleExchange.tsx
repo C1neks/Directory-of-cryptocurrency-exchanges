@@ -1,14 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { ExchangeContext } from "../App";
-import { SocialUrls } from "../models";
-import {
-  BsFacebook,
-  BsReddit,
-  BsSlack,
-  BsTelegram,
-  BsTwitter,
-} from "react-icons/bs";
 import {
   BackButton,
   ButtonWrapper,
@@ -16,6 +7,7 @@ import {
   Description,
   DescriptionTitle,
   DetailsText,
+  DetailsTextYear,
   ExchangeInfo,
   Icons,
   IconsWrapper,
@@ -27,22 +19,23 @@ import {
   Score,
   SocialIconLink,
   Square,
+  SquareWrapperSingle,
   Wrapper,
 } from "./SingleExchange.styles";
 import { IconContext } from "react-icons";
 import { useParams } from "react-router-dom";
-import { SquareWrapper } from "../Exchanges/Exchanges.styles";
 
-const SingleExchange: React.FC = ({}) => {
+import { SocialMediaUrls } from "./socialMediaUrls";
+import { SocialDetails, SocialLinks } from "../models";
+import { ContainerMain } from "../Exchanges/Exchanges.styles";
+
+const SingleExchange: React.FC = () => {
   let { exchangeID } = useParams();
 
-  const context = useContext(ExchangeContext);
-  const [socialLink, setSocialLinks] = useState<SocialUrls>();
-  const exchangeDetails = context.exchanges.find(
-    (exchange) => exchange.id === exchangeID
-  );
+  const [exchangeDetails, setExchangeDetails] = useState<SocialLinks>();
+  const [socialIcons, setSocialIcons] = useState<Array<SocialDetails>>([]);
 
-  const getSocialMediaLinks = async () => {
+  const getExchangeDetails = async () => {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/exchanges/${exchangeID}`
     );
@@ -52,52 +45,15 @@ const SingleExchange: React.FC = ({}) => {
 
   useEffect(() => {
     (async () => {
-      const result = await getSocialMediaLinks();
-
-      setSocialLinks(result);
+      const details = await getExchangeDetails();
+      setExchangeDetails(details);
+      const mediaUrls = await SocialMediaUrls(details);
+      setSocialIcons(mediaUrls);
     })();
   }, []);
 
-  const facebookIcon = socialLink?.facebook_url ? (
-    <SocialIconLink href={socialLink.facebook_url} data-testid="social-icon">
-      {" "}
-      <BsFacebook />
-    </SocialIconLink>
-  ) : null;
-
-  const redditIcon = socialLink?.reddit_url ? (
-    <SocialIconLink href={socialLink.reddit_url} data-testid="social-icon">
-      {" "}
-      <BsReddit />
-    </SocialIconLink>
-  ) : null;
-
-  const slackIcon = socialLink?.slack_url ? (
-    <SocialIconLink href={socialLink.slack_url} data-testid="social-icon">
-      {" "}
-      <BsSlack />
-    </SocialIconLink>
-  ) : null;
-
-  const telegramIcon = socialLink?.telegram_url ? (
-    <SocialIconLink href={socialLink.telegram_url} data-testid="social-icon">
-      {" "}
-      <BsTelegram />
-    </SocialIconLink>
-  ) : null;
-
-  const twitterIcon = socialLink?.twitter_handle ? (
-    <SocialIconLink
-      href={"https://twitter.com/" + socialLink.twitter_handle}
-      data-testid="social-icon"
-    >
-      {" "}
-      <BsTwitter />
-    </SocialIconLink>
-  ) : null;
-
   return (
-    <>
+    <ContainerMain>
       <MoreDetailsAboutCurrency>
         <h4>Directory of Cryptocurrency</h4>
       </MoreDetailsAboutCurrency>
@@ -118,10 +74,10 @@ const SingleExchange: React.FC = ({}) => {
               <p>{exchangeDetails?.country}</p>
             </DetailsText>
 
-            <DetailsText year>
+            <DetailsTextYear>
               <p>Year of Establishment</p>
               <p>{exchangeDetails?.year_established}</p>
-            </DetailsText>
+            </DetailsTextYear>
           </RankCountry>
 
           <Description>
@@ -135,11 +91,11 @@ const SingleExchange: React.FC = ({}) => {
           <IconContext.Provider value={{ color: "#003fc2", size: "20" }}>
             <IconsWrapper>
               <Icons>
-                {facebookIcon}
-                {redditIcon}
-                {slackIcon}
-                {telegramIcon}
-                {twitterIcon}
+                {socialIcons.map((social: SocialDetails) => (
+                  <SocialIconLink href={social.link} data-testid="social-icon">
+                    {social.icon}
+                  </SocialIconLink>
+                ))}
               </Icons>
             </IconsWrapper>
           </IconContext.Provider>
@@ -153,10 +109,10 @@ const SingleExchange: React.FC = ({}) => {
           Go Back
         </BackButton>
       </ButtonWrapper>
-      <SquareWrapper single>
+      <SquareWrapperSingle>
         <Square />
-      </SquareWrapper>
-    </>
+      </SquareWrapperSingle>
+    </ContainerMain>
   );
 };
 
